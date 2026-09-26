@@ -1,0 +1,123 @@
+USE MEDICART;
+
+CREATE TABLE Review
+(
+    ReviewID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    ProductID INT,
+    ReviewText VARCHAR(200),
+    ReviewDate DATE,
+
+    FOREIGN KEY (ProductID)
+    REFERENCES Product(ProductID)
+);
+
+CREATE TABLE Rating
+(
+    RatingID INT PRIMARY KEY,
+    ReviewID INT,
+    Rating INT,
+
+    FOREIGN KEY (ReviewID)
+    REFERENCES Review(ReviewID)
+);
+
+INSERT INTO Review VALUES
+(701, "POOJA", 101, "GOOD PRODUCT", "2026-09-01"),
+(702, "THARUN", 102, "GOOD QUALITY", "2026-09-02"),
+(703, "SANJAY", 103, "EFFECTIVE MEDICINE", "2026-09-03"),
+(704, "RAJEE", 104, "GOOD PRODUCT", "2026-09-04"),
+(705, "DHIVYA", 105, "VERY USEFUL", "2026-09-05"),
+(706, "HEMA", 106, "GOOD QUALITY", "2026-09-06"),
+(707, "RESHMA", 107, "AVERAGE PRODUCT", "2026-09-07"),
+(708, "PARE", 108, "GOOD MEDICINE", "2026-09-08"),
+(709, "SRIRAM", 109, "EFFECTIVE MEDICINE", "2026-09-09"),
+(710, "RIYAS", 110, "GOOD QUALITY", "2026-09-10"),
+(711, "ROHITH", 111, "VERY GOOD PRODUCT", "2026-09-11"),
+(712, "BAVA", 112, "USEFUL PRODUCT", "2026-09-12"),
+(713, "KAYAL", 101, "GOOD PRODUCT", "2026-09-13"),
+(714, "PREETHI", 102, "BAD QUALITY", "2026-09-14"),
+(715, "SOWYMA", 103, "GOOD MEDICINE", "2026-09-15"),
+(716, "RAJESHWARI", 104, "VERY GOOD", "2026-09-16"),
+(717, "EDWARD", 105, "SATISFIED WITH PRODUCT", "2026-09-17"),
+(718, "LASKSHIYA", 106, "GOOD QUALITY", "2026-09-18"),
+(719, "MANOJ", 107, "NOT BAD", "2026-09-19"),
+(720, "GOKUL", 108, "EXCELLENT PRODUCT", "2026-09-20");
+
+SELECT * FROM Review;
+
+INSERT INTO Rating VALUES
+(801, 701, 5),
+(802, 702, 4),
+(803, 703, 5),
+(804, 704, 4),
+(805, 705, 5),
+(806, 706, 4),
+(807, 707, 3),
+(808, 708, 5),
+(809, 709, 4),
+(810, 710, 4),
+(811, 711, 5),
+(812, 712, 4),
+(813, 713, 5),
+(814, 714, 2),
+(815, 715, 5),
+(816, 716, 5),
+(817, 717, 4),
+(818, 718, 4),
+(819, 719, 3),
+(820, 720, 5);
+
+SELECT * FROM Rating;
+
+SELECT * FROM Review
+WHERE ReviewText LIKE '%Good%';
+
+SELECT * FROM Review
+WHERE ReviewText LIKE '%Bad%';
+
+SELECT * FROM Review
+WHERE CustomerName = 'POOJA';
+
+SELECT * FROM Review
+WHERE ReviewDate >= '2026-09-10';
+
+SELECT * FROM Review
+ORDER BY ReviewDate DESC;
+
+SELECT * FROM Rating
+WHERE Rating = 5;
+
+SELECT * FROM Rating
+WHERE Rating >= 4;
+
+SELECT * FROM Rating
+WHERE Rating < 4;
+
+SELECT COUNT(*) AS TotalReviews
+FROM Review;
+
+SELECT COUNT(*) AS TotalRatings
+FROM Rating;
+
+SELECT AVG(Rating) AS AverageRating
+FROM Rating;
+
+SELECT MAX(Rating) AS HighestRating
+FROM Rating;
+
+SELECT MIN(Rating) AS LowestRating
+FROM Rating;
+
+SELECT Rating, COUNT(*) AS RatingCount
+FROM Rating
+GROUP BY Rating
+ORDER BY Rating;
+
+SELECT CustomerName, COUNT(*) AS ReviewCount
+FROM Review
+GROUP BY CustomerName
+ORDER BY ReviewCount DESC;
+
+SELECT * FROM Review;
+SELECT * FROM Rating;
